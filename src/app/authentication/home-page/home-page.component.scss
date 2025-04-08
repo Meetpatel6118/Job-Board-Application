@@ -1,0 +1,93 @@
+@import "primeicons/primeicons.css";
+.content{
+    background-color: #f3f2f1;
+    position: relative;
+}
+.modal{
+  background-color: rgb(0,0,0,0.5);
+}
+.cards{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 50px 100px;
+}
+.active-category {
+    background-color: #b00fd0 !important; 
+    color: white !important;
+    border: 1px solid #007bff !important;
+    box-shadow: none !important;
+  }
+p-card:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+.cards-small{
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0px 100px;
+
+
+}
+p-card{
+    margin: 25px 25px;
+    transition: transform 0.5s;
+}
+
+.profile-card{
+    position: relative;
+}
+
+::ng-deep .profile-card .p-card-header img {
+    position: absolute;
+    width: 150px !important;
+    height: 150px !important;
+    display: inline;
+    border-radius: 50%;
+    margin-top: -75px;
+    margin-left: 100px 
+}
+
+::ng-deep .profile-card .p-card .p-card-body {
+    padding: 6rem 1.25rem 1.25rem 1.25rem;
+}
+
+::ng-deep .profile-card p-card {
+    margin: 60px 25px;
+}
+
+.floating-btn{
+    position: fixed;
+right:    50px;
+bottom:   50px;
+}
+
+.modal-body{
+    display: flex;
+    justify-content: space-around;
+}
+.custom-button{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 25px;
+    background-color: #fff;
+    border: none;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    width: 150px;
+    line-height: 1.2;
+    border-radius: 10px;
+}
+
+.custom-button-blue{
+    background-color: #3B82F6;
+}
+
+.custom-button .button-text{
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+.custom-button-blue .button-text{
+    color: white;
+}

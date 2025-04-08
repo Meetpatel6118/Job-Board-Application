@@ -1,0 +1,61 @@
+<div class="container-fluid set_alignment">
+  <p-card header="Login" [style]="{ width: '360px' }">
+    <ng-template pTemplate="header">
+      <img
+        alt="Card"
+        src="../../../assets/images/login.jpg"
+      />
+    </ng-template>
+
+    <div>
+      <div class="col-xs-12">
+        <form [formGroup]="loginForm" autocomplete="false" name="loginForm">
+          <div class="textfield">
+            <input
+              class="set_input"
+              pInputText
+              type="text"
+              formControlName="email"
+            />
+            <div
+              *ngIf="submitted && loginForm.controls['email'].invalid"
+              class="invalid-feedback"
+            >
+              <div>Please enter valid email</div>
+            </div>
+          </div>
+
+          <div class="textfield">
+            <p-password
+              formControlName="password"
+              [feedback]="false"
+              class="set_input"
+              [toggleMask]="true"
+            ></p-password>
+            <div
+              *ngIf="submitted && loginForm.controls['password'].invalid"
+              class="invalid-feedback"
+            >
+              <div>Password is required</div>
+            </div>
+          </div>
+          <div class="flex justify-content-center" style="margin-top: 7px">
+            <p-toast></p-toast>
+            <div class="button-align">
+              <button
+                type="button"
+                pButton
+                pRipple
+                (click)="onSubmit()"
+                label="Submit"
+              ></button>
+              <a [routerLink]="['/register']" class="secondary-btn" style=""
+                >Register</a
+              >
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </p-card>
+</div>

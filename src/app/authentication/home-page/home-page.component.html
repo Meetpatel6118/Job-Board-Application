@@ -1,0 +1,116 @@
+<app-header></app-header>
+<div class="content">
+  <h3 style="display: block; padding: 25px 125px;">Job Posts</h3>
+
+  <!-- CATEGORY FILTER BUTTONS -->
+  <div class="category-filter" style="margin: 15px 125px;">
+    <button 
+      pButton 
+      label="All" 
+      (click)="filterByCategory('All')" 
+      [ngClass]="{'active-category': selectedCategory === 'All'}"
+      style="margin-right: 5px">
+    </button>
+  
+    <button 
+      *ngFor="let cat of categories"
+      pButton 
+      [label]="cat"
+      (click)="filterByCategory(cat)"
+      [ngClass]="{'active-category': selectedCategory === cat}"
+      style="margin-right: 5px">
+    </button>
+  </div>
+
+  <!-- STUDENT VIEW -->
+  <div class="cards-small" *ngIf="loggedInUser.role == 'student'">
+    <p-card *ngFor="let i of filteredPosts" header="{{i.job_title}}" subheader="{{i.companyName}}"
+      [style]="{ width: '360px', height: '100%' }">
+      <ng-template pTemplate="header">
+        <img alt="Card" src="https://primefaces.org/cdn/primeng/images/usercard.png" />
+      </ng-template>
+      <p>{{ i.job_desc }}</p>
+      <ng-template pTemplate="footer">
+        <p-button 
+  *ngIf="!i.applicationStatus" 
+  label="Apply" 
+  (click)="openPopup(i)" 
+  icon="pi pi-check"
+></p-button>
+
+<p-button 
+  *ngIf="i.applicationStatus === 'pending'" 
+  label="Applied" 
+  styleClass="p-button-warning" 
+  icon="pi pi-clock"
+></p-button>
+
+<p-button 
+  *ngIf="i.applicationStatus === 'accepted'" 
+  label="Accepted" 
+  styleClass="p-button-success" 
+  icon="pi pi-check-circle"
+></p-button>
+
+<p-button 
+  *ngIf="i.applicationStatus === 'rejected'" 
+  label="Rejected" 
+  styleClass="p-button-danger" 
+  icon="pi pi-times"
+></p-button>
+      </ng-template>
+    </p-card>
+  </div>
+
+  <!-- EMPLOYER VIEW -->
+  <div class="cards-small" *ngIf="loggedInUser.role == 'employer'">
+    <p-card *ngFor="let i of filteredPosts" header="{{i.job_title}}" subheader="{{i.companyName}}"
+      [style]="{ width: '360px', height: '100%' }" (click)="redirectToPost(i)">
+      <ng-template pTemplate="header">
+        <img alt="Card" src="https://primefaces.org/cdn/primeng/images/usercard.png" />
+      </ng-template>
+      <p>{{ i.job_desc }}</p>
+      <ng-template pTemplate="footer">
+        <p-button label="Edit" (click)="editJob(i.jobID);$event.stopPropagation()" icon="pi pi-file-edit"
+          [style]="{ padding: '12px 25px 12px 20px', margin: '0 20px 0 0' }"></p-button>
+        <p-button label="Delete" (click)="deletePost(i.jobID); $event.stopPropagation()" styleClass="p-button-danger"
+          icon="pi pi-trash" [style]="{ padding: '12px 25px 12px 20px' }"></p-button>
+      </ng-template>
+    </p-card>
+  </div>
+
+  <!-- ADD POST BUTTON FOR EMPLOYER -->
+  <p-button [routerLink]="['/addpost']" label="Post a Job" class="floating-btn"
+    *ngIf="loggedInUser.role == 'employer'"></p-button>
+</div>
+
+<p-toast></p-toast>
+
+<!-- APPLICATION MODAL -->
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{ display: displayStyle }">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Upload Resume to Apply</h4>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid set_alignment">
+          <p-card [style]="{ width: '360px', position: 'relative' }">
+            <ng-template pTemplate="header">
+              <img alt="Card" src="../../../assets/images/resume.svg" />
+            </ng-template>
+            <h4>Please upload your resume</h4>
+            <ng-template pTemplate="footer">
+              <input pInputText type="file" class="resumeText" (change)="onFileSelected($event)" />
+              <p *ngIf="fileName">Selected: <b>{{ fileName }}</b></p>
+            </ng-template>
+          </p-card>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="applyJob()">Apply</button>
+        <button type="button" class="btn btn-danger" (click)="closePopup()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

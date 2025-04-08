@@ -1,0 +1,56 @@
+@import "primeicons/primeicons.css";
+.set_alignment{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+  -ms-overflow-style: none; 
+  scrollbar-width: none;  
+  background-color: #f3f2f1;
+}
+.form-align{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f3f2f1;
+  height: 100%;
+  padding: 50px 0;
+}
+.container::-webkit-scrollbar {
+  display: none;
+}
+::ng-deep .invalid-feedback{
+  display: block !important;
+  font-size: 13px;
+  color: red;
+}
+.textfield{
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+
+.set_button_align{
+  ::ng-deep .p-button{
+  width: 100% !important;
+  margin: unset !important;
+  margin-bottom: 5px !important;
+  }
+}
+
+.button-align{
+  display: flex;
+  align-items: center;
+}
+
+.secondary-btn{
+  margin-left:20px;
+  color: #3B82F6;
+  text-decoration: none;
+}
+::ng-deep ul{
+  margin-bottom: 0 !important;
+}
